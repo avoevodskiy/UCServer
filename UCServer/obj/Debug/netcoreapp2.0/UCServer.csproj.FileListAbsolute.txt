@@ -1,0 +1,11 @@
+C:\Users\avoev\source\repos\UCServer\UCServer\bin\Debug\netcoreapp2.0\UCServer.deps.json
+C:\Users\avoev\source\repos\UCServer\UCServer\bin\Debug\netcoreapp2.0\UCServer.runtimeconfig.json
+C:\Users\avoev\source\repos\UCServer\UCServer\bin\Debug\netcoreapp2.0\UCServer.runtimeconfig.dev.json
+C:\Users\avoev\source\repos\UCServer\UCServer\bin\Debug\netcoreapp2.0\UCServer.dll
+C:\Users\avoev\source\repos\UCServer\UCServer\obj\Debug\netcoreapp2.0\UCServer.csprojResolveAssemblyReference.cache
+C:\Users\avoev\source\repos\UCServer\UCServer\obj\Debug\netcoreapp2.0\UCServer.csproj.CoreCompileInputs.cache
+C:\Users\avoev\source\repos\UCServer\UCServer\obj\Debug\netcoreapp2.0\UCServer.AssemblyInfoInputs.cache
+C:\Users\avoev\source\repos\UCServer\UCServer\obj\Debug\netcoreapp2.0\UCServer.AssemblyInfo.cs
+C:\Users\avoev\source\repos\UCServer\UCServer\bin\Debug\netcoreapp2.0\UCServer.pdb
+C:\Users\avoev\source\repos\UCServer\UCServer\obj\Debug\netcoreapp2.0\UCServer.dll
+C:\Users\avoev\source\repos\UCServer\UCServer\obj\Debug\netcoreapp2.0\UCServer.pdb
