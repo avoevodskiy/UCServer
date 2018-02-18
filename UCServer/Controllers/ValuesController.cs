@@ -4,6 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using UCServer.Models;
+using Microsoft.EntityFrameworkCore;
+using System.Data.SqlClient;
+using Microsoft.Data.Sqlite;
 
 namespace UCServer.Controllers
 {
@@ -23,20 +26,22 @@ namespace UCServer.Controllers
         [HttpGet]
         public IEnumerable<User> GetAll()
         {
-            return _context.Users.ToList();
+            return _context.Users.Include("UsersCities.City").ToList();
         }
 
-        // GET api/values/5
-        [HttpGet("{id}", Name = "UserReturn")]
+        // GET api/user/5
+        [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            //return "value";
-            var user = _context.Users.Find(id);
+            
+            User user = _context.Users.Find(id);
             if (user == null)
             {
-                return null;
+                return NotFound();
             }
-            return new ObjectResult(user);
+            var citi3 = user.Cities;//разобраться почему то возвращает список, то не возвращает.
+
+            return new ObjectResult(citi3);
 
         }
 
@@ -59,7 +64,8 @@ namespace UCServer.Controllers
             }
             _context.Users.Add(newuser);
             _context.SaveChanges();
-            return CreatedAtRoute("UserReturn", new { id = newuser.Id });
+            int id = newuser.Id;
+            return new ObjectResult(newuser);
         }
 
 
