@@ -33,13 +33,17 @@ namespace UCServer.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
+            var users = _context.Users.Include("UsersCities.City").ToList();
+            User user = users.Find(x => x.Id == id);  //_context.Users.Find(id);
             
-            User user = _context.Users.Find(id);
             if (user == null)
             {
                 return NotFound();
             }
-            var citi3 = user.Cities;//разобраться почему то возвращает список, то не возвращает.
+
+
+
+            var citi3 = user.Cities;
 
             return new ObjectResult(citi3);
 
