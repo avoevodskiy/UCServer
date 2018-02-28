@@ -7,6 +7,7 @@ using UCServer.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Data.SqlClient;
 using Microsoft.Data.Sqlite;
+using System.Data.SqlClient;
 
 namespace UCServer.Controllers
 {
@@ -26,14 +27,22 @@ namespace UCServer.Controllers
         [HttpGet]
         public IEnumerable<User> GetAll()
         {
-            return _context.Users.Include("UsersCities.City").ToList();
+
+            /*IEnumerable<User>
+             * SqlCommand command = new SqlCommand("SELECT * FROM Users", conn);
+            SqlDataReader reader = command.ExecuteReader();//???
+            //command.ExecuteNonQuery;*/
+            
+
+
+            return _context.GetUsers();
         }
 
         // GET api/user/5
-        [HttpGet("{id}")]
+       /* [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            var users = _context.Users.Include("UsersCities.City").ToList();
+            /*var users = _context.Users.Include("UsersCities.City").ToList();
             User user = users.Find(x => x.Id == id);  //_context.Users.Find(id);
             
             if (user == null)
@@ -59,10 +68,10 @@ namespace UCServer.Controllers
             //}
         }*/
 
-        [HttpPost]
+       /* [HttpPost]
         public IActionResult Create([FromBody] User newuser)
         {
-            if (newuser == null)
+            /*if (newuser == null)
             {
                 return BadRequest();
             }
@@ -83,6 +92,6 @@ namespace UCServer.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-        }
+        }*/
     }
 }

@@ -21,6 +21,9 @@ namespace UCServer.Models
         private ICollection<UserCity> UsersCities { get;  } = new List<UserCity>();
         [NotMapped]
         public IEnumerable<string> Cities=> UsersCities.Select(e => e.City.Name);//получаем названия городов
+
+        
+
     }
 
 }
