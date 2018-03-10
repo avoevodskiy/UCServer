@@ -27,7 +27,8 @@ namespace UCServer
         public void ConfigureServices(IServiceCollection services)
         {
             //региструем контекст бд, строка подключения берется из appsetting.json
-            services.AddDbContext<UCdbContext>(options => options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddTransient<IUCdb, UCdbContext>();
+            //services.AddDbContext<UCdbContext>(options => options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
             services.AddMvc();
 
         }

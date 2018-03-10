@@ -3563,7 +3563,7 @@
           }
         }
       },
-      "System.Data.SQLite/1.0.107": {
+      "System.Data.SQLite/1.0.108": {
         "type": "package"
       },
       "System.Diagnostics.Contracts/4.3.0": {
@@ -9147,12 +9147,12 @@
         "version.txt"
       ]
     },
-    "System.Data.SQLite/1.0.107": {
-      "sha512": "SCH0B1z8dP3ab9g0YTa7dJPun9VhWP8g5XR8rbUbRDSIKUDeqkEUMFhNXD3Sv6X/1hwA1kHW+R9xegAgcwclVA==",
+    "System.Data.SQLite/1.0.108": {
+      "sha512": "QIh+GB+erDrvVIbEpEfVRF1U9fJOwmZCRyAPISDwmt8xn3vilM2xjEjr6hQBTI4a2uPxsn6cihT9BJwXAnM8eQ==",
       "type": "package",
-      "path": "system.data.sqlite/1.0.107",
+      "path": "system.data.sqlite/1.0.108",
       "files": [
-        "system.data.sqlite.1.0.107.nupkg.sha512",
+        "system.data.sqlite.1.0.108.nupkg.sha512",
         "system.data.sqlite.nuspec"
       ]
     },
@@ -13113,10 +13113,9 @@
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.0": [
       "Microsoft.AspNetCore.All >= 2.0.5",
-      "Microsoft.EntityFrameworkCore.Sqlite >= 2.0.1",
       "Microsoft.NETCore.App >= 2.0.0",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 2.0.2",
-      "System.Data.SQLite >= 1.0.107",
+      "System.Data.SQLite >= 1.0.108",
       "System.Security.Permissions >= 4.4.1"
     ]
   },
@@ -13168,10 +13167,6 @@
             "target": "Package",
             "version": "[2.0.5, )"
           },
-          "Microsoft.EntityFrameworkCore.Sqlite": {
-            "target": "Package",
-            "version": "[2.0.1, )"
-          },
           "Microsoft.NETCore.App": {
             "target": "Package",
             "version": "[2.0.0, )",
@@ -13183,7 +13178,7 @@
           },
           "System.Data.SQLite": {
             "target": "Package",
-            "version": "[1.0.107, )"
+            "version": "[1.0.108, )"
           },
           "System.Security.Permissions": {
             "target": "Package",

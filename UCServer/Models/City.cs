@@ -17,9 +17,9 @@ namespace UCServer.Models
         public string Name { get; set; }
 
         //привязка к UserCity - навигационное свойство
-        private ICollection<UserCity> UsersCities { get;  } = new List<UserCity>();
-        [NotMapped]
-        public IEnumerable<User> Users=> UsersCities.Select(e => e.User);//получаем пользователей
+       /// private ICollection<UserCity> UsersCities { get;  } = new List<UserCity>();
+        //[NotMapped]
+        //public IEnumerable<User> Users=> UsersCities.Select(e => e.User);//получаем пользователей
 
     }
 

@@ -17,8 +17,8 @@ namespace UCServer.Models
         public int CityId { get; set; }
 
         //привязка к Users,Cities - навигационные свойства
-        public User User { get; set; } 
-        public City City { get; set; } 
+        //public User User { get; set; } 
+        //public City City { get; set; } 
 
     }
 }

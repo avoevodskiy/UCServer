@@ -9,12 +9,20 @@ using Microsoft.Data.Sqlite;
 
 namespace UCServer.Models
 {
-    public class UCdbContext:DbContext
+    public class UCdbContext:IUCdb
     {
+        public string conStr;
+
         //public SqliteConnection conn;
         /*public DbSet<User> Users { get; set; } 
         public DbSet<City> Cities { get; set; }
         public DbSet<UserCity> UsersCities { get; set; }*/
+        //конструктор
+        public UCdbContext()
+        {
+            conStr = "Data Source=App_data\\Uc_db.db";
+        }
+        /*
         //конструктор
         public UCdbContext(DbContextOptions<UCdbContext> options) : base(options)
 
@@ -23,12 +31,12 @@ namespace UCServer.Models
            // conn.ConnectionString = "Data Source = App_Data\\UC_db.db";
             //conn.Open();
 
-        }
+        }*/
 
         public IList<User> GetUsers ()
         {
             // IEnumerable<User> UList =
-            SqliteConnection conn = new SqliteConnection("Data Source = App_Data\\UC_db.db;");
+            SqliteConnection conn = new SqliteConnection(conStr);
             conn.Open();
             SqliteCommand command = new SqliteCommand("SELECT * FROM Users", conn);
             
@@ -47,54 +55,67 @@ namespace UCServer.Models
 
                 
             bool flag = reader.HasRows;
-            conn.Dispose();
+            reader.Close();
+            conn.Close();
             return Users; //flag;
         }
 
         public IList<City> GetCitiesOfUser(int id)
         {
             // IEnumerable<User> UList =
-            SqliteConnection conn = new SqliteConnection("Data Source = App_Data\\UC_db.db;");
+            SqliteConnection conn = new SqliteConnection(conStr);
             conn.Open();
-            SqliteCommand command = new SqliteCommand("SELECT * FROM Users", conn);
+            SqliteCommand command = new SqliteCommand(@"SELECT c.* FROM UsersCities as uc, cities as c where c.id=uc.cityid and uc.userid=@param", conn);
+            command.Parameters.Add(new SqliteParameter("@param", SqliteType.Integer) { Value = id});
+            //command.Parameters["@param"].Value = id;
 
             SqliteDataReader reader = command.ExecuteReader();//???
 
-            IList<User> Users = new List<User>();
+            IList<City> Cities = new List<City>();
             while (reader.Read())
             {
-                var row = new User();
+                var row = new City();
                 row.Id = Int32.Parse(reader.GetString(0));
                 row.Name = reader.GetString(1);
-                Users.Add(row);
+                Cities.Add(row);
                 //IEnumerable<User> row = new IEnumerable<User>();
                 //row=reader.Cast<User>();
             }
 
 
             bool flag = reader.HasRows;
-            conn.Dispose();
-            return Users; //flag;
+            reader.Close();
+            conn.Close();
+            return Cities; //flag;
+        }
+
+        public string AddUser(User newUser)
+        {
+            SqliteConnection conn = new SqliteConnection(conStr);
+            conn.Open();
+            SqliteCommand command = new SqliteCommand(@"insert into users (name) values (@param)", conn);
+            command.Parameters.Add(new SqliteParameter("@param", SqliteType.Text) { Value = newUser.Name});
+            try
+            {
+               int insertResult=command.ExecuteNonQuery();
+                if (insertResult >0)
+                {
+                    conn.Close();
+                    return "New User succesfully added!";
+                }
+                else
+                {
+                    conn.Close();
+                    return "New User not added!!!";
+                }
+                    
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }                        
         }
 
 
-
-        /* protected override void OnModelCreating(ModelBuilder modelBuilder)
-         {
-             //ДЛя уверенности простовляем соответсвия с таблицами базы
-              modelBuilder.Entity<City>().ToTable("Cities");
-              modelBuilder.Entity<User>().ToTable("Users");
-              modelBuilder.Entity<UserCity>().ToTable("UsersCities");
-
-             // Прописываем связь один-ко-многим между User и UserCity
-             modelBuilder.Entity<UserCity>()
-                 .HasOne(pt => pt.User)
-                 .WithMany("UsersCities");
-             // Прописываем связь один-ко-многим между City и UserCity 
-             modelBuilder.Entity<UserCity>()
-                 .HasOne(pt => pt.City)
-                 .WithMany("UsersCities");
-
-         }*/
     }
 }
