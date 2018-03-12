@@ -16,13 +16,16 @@ namespace UCServer.Models
         [Key]
         public int Id { get; set; }
         [Required]
-        public string Name { get; set; }
+        public string FirstName { get; set; }
+        public string MiddleName { get; set; }
+        public string LastName { get; set; }
+        public DateTime BirthDate { get; set; }
         //привязка к UserCity - навигационное свойство
         //private ICollection<UserCity> UsersCities { get;  } = new List<UserCity>();
         //[NotMapped]
-       // public IEnumerable<string> Cities=> UsersCities.Select(e => e.City.Name);//получаем названия городов
+        // public IEnumerable<string> Cities=> UsersCities.Select(e => e.City.Name);//получаем названия городов
 
-        
+
 
     }
 

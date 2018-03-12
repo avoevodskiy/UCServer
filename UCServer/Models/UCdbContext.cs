@@ -13,44 +13,32 @@ namespace UCServer.Models
     {
         public string conStr;
 
-        //public SqliteConnection conn;
-        /*public DbSet<User> Users { get; set; } 
-        public DbSet<City> Cities { get; set; }
-        public DbSet<UserCity> UsersCities { get; set; }*/
         //конструктор
         public UCdbContext()
         {
             conStr = "Data Source=App_data\\Uc_db.db";
         }
-        /*
-        //конструктор
-        public UCdbContext(DbContextOptions<UCdbContext> options) : base(options)
 
-        {
-            //SqliteConnection conn = new SqliteConnection();
-           // conn.ConnectionString = "Data Source = App_Data\\UC_db.db";
-            //conn.Open();
-
-        }*/
 
         public IList<User> GetUsers ()
         {
-            // IEnumerable<User> UList =
             SqliteConnection conn = new SqliteConnection(conStr);
             conn.Open();
             SqliteCommand command = new SqliteCommand("SELECT * FROM Users", conn);
             
-            SqliteDataReader reader = command.ExecuteReader();//???
+            SqliteDataReader reader = command.ExecuteReader();
 
             IList<User> Users = new List<User>();
             while (reader.Read())
             {
                 var row = new User();
                 row.Id = Int32.Parse(reader.GetString(0));
-                row.Name = reader.GetString(1);
+                //row.Name = reader.GetString(1);
+                row.LastName = reader["LastName"].ToString();
+                row.FirstName = reader["FirstName"].ToString();
+                row.MiddleName = reader["MiddleName"].ToString();
+                row.BirthDate =(DateTime)Convert.ToDateTime(reader["BirthDate"]);
                 Users.Add(row);
-                //IEnumerable<User> row = new IEnumerable<User>();
-                //row=reader.Cast<User>();
             }
 
                 
@@ -93,8 +81,11 @@ namespace UCServer.Models
         {
             SqliteConnection conn = new SqliteConnection(conStr);
             conn.Open();
-            SqliteCommand command = new SqliteCommand(@"insert into users (name) values (@param)", conn);
-            command.Parameters.Add(new SqliteParameter("@param", SqliteType.Text) { Value = newUser.Name});
+            SqliteCommand command = new SqliteCommand(@"insert into users (FirstName,MiddleName,LastName,BirthDate) values (@Fname,@MName,@LName,@BDate)", conn);
+            command.Parameters.Add(new SqliteParameter("@Fname", SqliteType.Text) { Value = newUser.FirstName});
+            command.Parameters.Add(new SqliteParameter("@MName", SqliteType.Text) { Value = newUser.MiddleName });
+            command.Parameters.Add(new SqliteParameter("@LName", SqliteType.Text) { Value = newUser.LastName });
+            command.Parameters.Add(new SqliteParameter("@BDate", SqliteType.Text) { Value = newUser.BirthDate.ToString() });
             try
             {
                int insertResult=command.ExecuteNonQuery();
